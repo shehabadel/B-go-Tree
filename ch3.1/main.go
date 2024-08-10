@@ -32,4 +32,8 @@ func main() {
 	fmt.Printf("%08b \n", z)
 	fmt.Printf("%08b\n", x)
 	fmt.Printf("%08b\n", y)
+
+	var n int8 = 127
+
+	fmt.Printf("%08b %08b\n ", n, n<<1) //01111111 -0000010
 }
