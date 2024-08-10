@@ -30,4 +30,15 @@ func main() {
 	// fmt.Println(x, y) //compile error, no access to x and y
 
 	// x and y scopes are limited to their if statements only
+
+	// a,b:=c() //unused local variable error
+
+	d, e = c() //no unused local variable error
+}
+
+var a int
+var d, e int
+
+func c() (int, int) {
+	return 1, 2
 }
