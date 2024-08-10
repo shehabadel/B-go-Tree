@@ -36,4 +36,19 @@ func main() {
 	var n int8 = 127
 
 	fmt.Printf("%08b %08b\n ", n, n<<1) //01111111 -0000010
+
+	medals := []string{"gold", "silver", "bronze"}
+
+	var i uint = 0
+	fmt.Println(i - 1) //18446744073709551615
+
+	/**
+	panic: runtime error: index out of range [18446744073709551615] with length 3
+
+	goroutine 1 [running]:
+	main.main()
+	*/
+	for i := uint(len(medals) - 1); i >= 0; i-- {
+		fmt.Println(medals[i], i) // "bronze", "silver", "gold"
+	}
 }
