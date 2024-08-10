@@ -32,7 +32,9 @@ func main() {
 	// x and y scopes are limited to their if statements only
 
 	// a,b:=c() //unused local variable error
+	a, b := c() //creates a new local variable a that shadows global variable a
 
+	fmt.Println(a, b)
 	d, e = c() //no unused local variable error
 }
 
