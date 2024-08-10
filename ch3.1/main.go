@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"math"
+)
 
 var i int = 1
 
@@ -37,7 +40,7 @@ func main() {
 
 	fmt.Printf("%08b %08b\n ", n, n<<1) //01111111 -0000010
 
-	medals := []string{"gold", "silver", "bronze"}
+	// medals := []string{"gold", "silver", "bronze"}
 
 	var i uint = 0
 	fmt.Println(i - 1) //18446744073709551615
@@ -48,7 +51,19 @@ func main() {
 	goroutine 1 [running]:
 	main.main()
 	*/
-	for i := uint(len(medals) - 1); i >= 0; i-- {
-		fmt.Println(medals[i], i) // "bronze", "silver", "gold"
-	}
+	// for i := uint(len(medals) - 1); i >= 0; i-- {
+	// 	fmt.Println(medals[i], i) // "bronze", "silver", "gold"
+	// }
+
+	ascii := 'a'
+	unicode := 's'
+	newline := '\n'
+	fmt.Printf("%d %[1]c %[1]q\n", ascii)   // "97 a 'a'"
+	fmt.Printf("%d %[1]c %[1]q\n", unicode) // "22269 Image 'Image'"
+	fmt.Printf("%d %[1]q\n", newline)       // "10 '\n'"
+	var Avogadro float64 = 6.02214129e23
+	fmt.Printf("%f\n", Avogadro)
+	var v float64
+	fmt.Println(math.IsNaN(v / v))
+
 }
