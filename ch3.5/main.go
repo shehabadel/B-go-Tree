@@ -42,6 +42,7 @@ func main() {
 	fmt.Println(v)
 	fmt.Println(intsToString([]int{1, 2, 3})) // "[1, 2, 3]"
 	fmt.Println(commaIteration("1234"))
+	fmt.Println(commaFloat("12312312345.23"))
 
 }
 
@@ -91,4 +92,26 @@ func commaIteration(s string) string {
 		buf.WriteString(s[i : i+3])
 	}
 	return buf.String()
+}
+
+func commaFloat(s string) string {
+
+	var buf bytes.Buffer
+	intLastIndx := strings.LastIndex(s, ".")
+	if intLastIndx == -1 {
+		intLastIndx = len(s)
+	}
+	intSubstr := s[:intLastIndx]
+	intsStr := commaAux(intSubstr)
+	buf.WriteString(intsStr)
+	buf.WriteString(s[intLastIndx:])
+	return buf.String()
+}
+
+func commaAux(s string) string {
+	n := utf8.RuneCountInString(s)
+	if n <= 3 {
+		return s
+	}
+	return commaAux(s[:n-3]) + "," + s[n-3:]
 }
