@@ -41,6 +41,7 @@ func main() {
 	v := comma("1923234223")
 	fmt.Println(v)
 	fmt.Println(intsToString([]int{1, 2, 3})) // "[1, 2, 3]"
+	fmt.Println(commaIteration("1234"))
 
 }
 
@@ -71,5 +72,23 @@ func intsToString(values []int) string {
 		fmt.Fprintf(&buf, "%d", v)
 	}
 	buf.WriteByte(']')
+	return buf.String()
+}
+
+func commaIteration(s string) string {
+	var buf bytes.Buffer
+
+	var pre int
+	pre = len(s) % 3
+	if pre == 0 {
+		pre = 3
+	}
+
+	buf.WriteString(s[:pre])
+
+	for i := pre; i < len(s); i += 3 {
+		buf.WriteString(",")
+		buf.WriteString(s[i : i+3])
+	}
 	return buf.String()
 }
