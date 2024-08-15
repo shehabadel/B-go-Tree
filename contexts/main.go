@@ -37,7 +37,6 @@ func RunJob(ctxWithTimeout context.Context, cancel context.CancelFunc, jobs []st
 			log.Default().Println("Cancelled: ", v, ctxWithTimeout.Err().Error())
 			return
 		default:
-			ctxWithTimeout.Value("alo")
 			if i == 1 {
 				cancel()
 			}
