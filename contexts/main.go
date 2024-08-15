@@ -18,24 +18,31 @@ type CtxValue struct {
 func main() {
 	jobs := []string{"1", "2", "3"}
 	c := context.Background()
-	c = context.WithValue(c, CtxKey{}, CtxValue{id: primitive.NewObjectID().Hex()})
-	ctxWithTimeout, cancel := context.WithTimeout(c, time.Second*19)
+	c1 := context.WithValue(c, CtxKey{}, CtxValue{id: primitive.NewObjectID().Hex()})
+	c, cancelTimeout := context.WithTimeout(c1, time.Second*6)
+	defer cancelTimeout()
+	ctxWithTimeout, cancel := context.WithCancel(c)
 	defer cancel()
-	RunJob(ctxWithTimeout, cancel, jobs)
+	go RunJob(ctxWithTimeout, cancel, jobs)
+	time.Sleep(time.Second * 6)
+	log.Default().Println("finished")
 
 }
 
 func RunJob(ctxWithTimeout context.Context, cancel context.CancelFunc, jobs []string) {
 
-	for _, v := range jobs {
+	for i, v := range jobs {
 		select {
 		case <-ctxWithTimeout.Done():
-			log.Default().Println("Cancelled: ", v)
+			log.Default().Println("Cancelled: ", v, ctxWithTimeout.Err().Error())
 			return
 		default:
 			ctxWithTimeout.Value("alo")
+			if i == 1 {
+				cancel()
+			}
 			log.Default().Println("Run job: ", v, ctxWithTimeout.Value(CtxKey{}).(CtxValue).id)
-			time.Sleep(time.Second * 20)
+			time.Sleep(time.Second * 5)
 		}
 	}
 }
