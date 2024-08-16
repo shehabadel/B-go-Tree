@@ -21,7 +21,7 @@ func main() {
 	c1 := context.WithValue(c, CtxKey{}, CtxValue{id: primitive.NewObjectID().Hex()})
 	c, cancelTimeout := context.WithTimeout(c1, time.Second*6)
 	defer cancelTimeout()
-	c, cancel := context.WithTimeout(c, time.Second*7)
+	c, cancel := context.WithTimeout(c, time.Second*4)
 	defer cancel()
 	go RunJob(c, cancel, jobs)
 	time.Sleep(time.Second * 6)
