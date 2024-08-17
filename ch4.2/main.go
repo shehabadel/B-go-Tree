@@ -11,6 +11,10 @@ func main() {
 
 	fmt.Println(a)
 
+	var q []int
+	g := []int{}
+	fmt.Println(q == nil, g == nil)
+
 }
 
 func reverse(s []int) {
