@@ -53,3 +53,15 @@ func appendInt(x []int, y int) []int {
 	z[len(x)] = y
 	return z
 }
+
+func nonEmpty(strings []string) []string {
+	i := 0
+
+	for _, v := range strings {
+		if v != "" {
+			strings[i] = v
+			i++
+		}
+	}
+	return strings[:i]
+}
