@@ -71,6 +71,8 @@ func consume(ch *amqp091.Channel, wait chan string) {
 		if err != nil {
 			log.Default().Println("ack error")
 		}
-		wait <- "done"
+		if string(msg.Body) == "exit" {
+			wait <- "done"
+		}
 	}
 }
